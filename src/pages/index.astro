@@ -2,7 +2,7 @@
 import BasicLayout from "../layouts/BasicLayout.astro";
 ---
 <BasicLayout fixed={true}>
-	<img src="/Gradient.webp" class="background" />
+	<img src="/background-low-quality.webp" class="background blur" />
 	
 	<section class="hero">
 		<div class="outer">
@@ -18,7 +18,18 @@ import BasicLayout from "../layouts/BasicLayout.astro";
 		</div>
 	</section>
 </BasicLayout>
-
+<script>
+	// Load high quality background image asynchronously
+	document.addEventListener('DOMContentLoaded', () => {
+		const background = document.querySelector('.background');
+		const highQualityImage = new Image();
+		highQualityImage.src = '/background-high-quality.webp';
+		highQualityImage.onload = () => {
+			background.src = highQualityImage.src;
+			background.classList.remove('blur');
+		};
+	});
+</script>
 <style>
 	.hero {
 		width: 100%;
@@ -74,6 +85,10 @@ import BasicLayout from "../layouts/BasicLayout.astro";
 		object-fit: cover;
 		border-radius: 0;
 		z-index: -1;
+	}
+
+	.background.blur {
+		filter: blur(10px);
 	}
 
 	@media (max-width: 1500px) {

@@ -35,6 +35,7 @@ const { fixed } = Astro.props as Props;
 			<SocialLinks />
 		</div>
 
+		<!-- mobile only -->
 		<svg viewBox="0 0 16 16" width="16" height="16" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="open-menu" onclick="document.querySelector('.internal-links').classList.toggle('shown');">
 			<line x1="0" y1="1" x2="16" y2="1"></line>
 			<line x1="0" y1="8" x2="16" y2="8"></line>
@@ -58,10 +59,9 @@ const { fixed } = Astro.props as Props;
 	nav {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-
-		margin: auto;
+		justify-content: center;
 		padding: 1em;
+		position: relative;
 	}
 	nav a {
 		padding: 1em 0.5em;
@@ -75,7 +75,8 @@ const { fixed } = Astro.props as Props;
 	}
 
 	h2 {
-		margin: 0;
+		margin-right: auto;
+		margin-bottom: 0;
 		font-size: 1em;
 	}
 
@@ -97,9 +98,23 @@ const { fixed } = Astro.props as Props;
 		padding: 1rem;
 	}
 
+	:global(.internal-links) {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
 	@media (max-width: 720px) {
 		.social-links {
 			display: none;
+		}
+
+		::global(.internal-links) {
+			position: static;
+			top: 0;
+			left: 0;
+			transform: none;
 		}
 	}
 

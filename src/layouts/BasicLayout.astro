@@ -6,15 +6,17 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 interface Props {
 	fixed?: boolean;
+	title?: string;
+	description?: string;
 }
 
-const { fixed } = Astro.props as Props;
+const { fixed, title, description } = Astro.props as Props;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={title || SITE_TITLE} description={description || SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header fixed={fixed} />
