@@ -6,6 +6,6 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://nhs-t10.github.io',
-	base: '/website',
+	base: '/',
 	integrations: [mdx(), sitemap()],
 });
