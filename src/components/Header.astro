@@ -1,0 +1,143 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import { SITE_TITLE } from '../consts';
+import SocialLinks from './SocialLinks.astro';
+
+interface Props {
+	fixed?: boolean;
+}
+
+const { fixed } = Astro.props as Props;
+---
+<header class:list={{ "fixed": fixed || false }}>
+	<nav>
+		<h2><a href="/">{SITE_TITLE}</a></h2>
+
+		<div class="internal-links">
+			<div class="inner">
+				<div class="mobile-only">
+					<h4>Navigate</h2>
+					
+					<svg viewBox="0 0 16 16" width="16" height="16" stroke="currentColor" stroke-width="2" stroke-linecap="round" onclick="document.querySelector('.internal-links').classList.toggle('shown');">
+						<line x1="0" y1="0" x2="16" y2="16"></line>
+						<line x1="16" y1="0" x2="0" y2="16"></line>
+					</svg>
+				</div>
+				
+				<HeaderLink href="/">Home</HeaderLink>
+				<HeaderLink href="/blog">Blog</HeaderLink>
+				<HeaderLink href="/about">About</HeaderLink>
+				<HeaderLink href="/sponsors">Sponsors</HeaderLink>
+			</div>
+		</div>
+
+		<div class="social-links">
+			<SocialLinks />
+		</div>
+
+		<svg viewBox="0 0 16 16" width="16" height="16" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="open-menu" onclick="document.querySelector('.internal-links').classList.toggle('shown');">
+			<line x1="0" y1="1" x2="16" y2="1"></line>
+			<line x1="0" y1="8" x2="16" y2="8"></line>
+			<line x1="0" y1="15" x2="16" y2="15"></line>
+		</svg>
+	</nav>
+</header>
+<style>
+	header {
+		margin: 0;
+		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+		
+		width: 100%;
+	}
+
+	header.fixed {
+		position: absolute;
+		background: none;
+	}
+
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		margin: auto;
+		padding: 1em;
+	}
+	nav a {
+		padding: 1em 0.5em;
+		color: var(--black);
+		border-bottom: 4px solid transparent;
+		text-decoration: none;
+	}
+	nav a.active {
+		text-decoration: none;
+		border-bottom-color: var(--accent);
+	}
+
+	h2 {
+		margin: 0;
+		font-size: 1em;
+	}
+
+	h2 a,
+	h2 a.active {
+		text-decoration: none;
+	}
+
+	h4 {
+		margin: 0;
+	}
+
+	.mobile-only {
+		display: none;
+	}
+
+	.open-menu {
+		display: none;
+		padding: 1rem;
+	}
+
+	@media (max-width: 720px) {
+		.social-links {
+			display: none;
+		}
+	}
+
+	@media (max-width: 500px) {
+		.open-menu {
+			display: block;
+		}
+
+		:global(.internal-links) {
+			opacity: 0;
+			pointer-events: none;
+
+			position: fixed;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+
+			background: var(--background);
+			transition: 0.25s all ease;
+		}
+
+		:global(.internal-links.shown) {
+			opacity: 1;
+			pointer-events: all;
+			left: 0;
+		}
+
+		.inner {
+			display: flex;
+			flex-direction: column;
+			padding: 2rem;
+		}
+
+		.mobile-only {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+	}
+</style>
