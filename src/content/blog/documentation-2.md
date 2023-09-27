@@ -9,7 +9,7 @@ heroImage: ''
 
 Our Goal: Catch up newer members on club, veterans meet up and introduce each other
 
-## Tasks
+## Projects
 
 ### 1. Getting to know members
 
