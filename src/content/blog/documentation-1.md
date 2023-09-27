@@ -2,7 +2,7 @@
 title: 'Documentation #1'
 description: 'This was the first meeting of our robotics 2023-2024 club.'
 pubDate: 'Sep 26 2023'
-heroImage: 'file:///var/folders/kk/rh039tr16jb_c0cl6v05ykv80000gp/T/TemporaryItems/NSIRD_screencaptureui_AiMjHS/Screen%20Shot%202023-09-26%20at%2010.09.11%20PM.png'
+heroImage: 'https://drive.google.com/file/d/1cBNsxqgor8W_8o5PLEUYuw-RkGlCE_yW/view?usp=sharing'
 ---
 # Introduction Meeting
 
