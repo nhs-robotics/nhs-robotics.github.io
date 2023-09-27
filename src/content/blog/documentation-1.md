@@ -4,6 +4,7 @@ description: 'This was the first meeting of our robotics 2023-2024 club.'
 pubDate: 'Sep 26 2023'
 heroImage: 'https://drive.google.com/file/d/1cBNsxqgor8W_8o5PLEUYuw-RkGlCE_yW/view?usp=sharing'
 ---
+8/31/2023
 # Introduction Meeting
 
 Our Goal: Introduce new members to the club and gather everyone into their respective groups
