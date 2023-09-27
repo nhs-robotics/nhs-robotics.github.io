@@ -9,7 +9,7 @@ heroImage: 'https://drive.google.com/file/d/1cBNsxqgor8W_8o5PLEUYuw-RkGlCE_yW/vi
 
 Our Goal: Introduce new members to the club and gather everyone into their respective groups
 
-## Tasks
+## Projects
 
 ### 1. Talked to treasurer
 
