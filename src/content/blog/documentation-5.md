@@ -1,6 +1,6 @@
 ---
 title: 'Documentation #5'
-description: 'Planning for competition day'
+description: 'Brainstorming Day'
 pubDate: 'Sep 27 2023'
 heroImage: 'One of the wall brainstorming images'
 ---
