@@ -21,7 +21,7 @@ Our Goal: Finish setting up the field for testing and integrating CV. Now that t
 
 ### 3. Code Base
 
->The Code base is what is used to run the robot, and is the foundational code for the robot. This needs to be updated from last year, and in some ways cleaned up to be smooth and error free. Part of the code base is maintained between years to make robot development faster. The year-to-year code was also updated.
+>The Code base is what is used to run the robot, and is the foundational code for the robot. This needs to be updated from last year, and in some ways cleaned up to be smooth and error free. Part of the code base is maintained between years to make the robot development faster. The year-to-year code was also updated.
 
 ### 4. Region based averages
 
@@ -36,4 +36,5 @@ Our Goal: Finish setting up the field for testing and integrating CV. Now that t
 >Michael the documentation manager started to incorporate the daily documentation into the blog so that it is updated on all of the previous days that have been missed. He will update it with the documentation every meeting from now on.
 
 ## Pictures
-[Eli working on ]
+[Eli working on region based averages with Mr. Batra's help]()
+[Ilan and Liam implementing CV]()
