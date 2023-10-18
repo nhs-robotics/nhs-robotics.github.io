@@ -29,4 +29,4 @@ Our Goal: Test out the box intake and outtake mechanism with the brush to see wh
 
 
 ## Pictures
-[Corbing working on servo on box]()
+[Corbin working on servo on box]()
