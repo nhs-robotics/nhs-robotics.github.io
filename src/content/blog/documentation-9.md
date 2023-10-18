@@ -1,6 +1,6 @@
 ---
 title: 'Documentation #9'
-description: 'Finalizing design'
+description: 'Finalizing design Day'
 pubDate: 'Oct 17 2023'
 heroImage: 'robot image'
 ---
