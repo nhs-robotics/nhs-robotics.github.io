@@ -1,7 +1,7 @@
 ---
 title: 'Documentation #8'
 description: 'Second Prototyping Day'
-pubDate: 'Sep 26 2023'
+pubDate: 'Sep 27 2023'
 heroImage: 'Shrikar and Desdin Image'
 ---
 9/26/2023
