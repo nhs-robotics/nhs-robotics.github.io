@@ -33,7 +33,7 @@ Our Goal: Checking up on the team as a whole, and the different sections of the 
 
 ### 6. April tag detection
 
->April tag detection has been completed, so that the robot can tell where the backboard for the pixels are. 
+>April tag detection is being started, Eli and Arlan are creating the code for detecting the april tags, but this is going to take a couple meetings more.
 
 
 ## Pictures
