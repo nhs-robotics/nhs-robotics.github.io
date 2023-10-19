@@ -17,7 +17,7 @@ Our Goal: Checking up on the team as a whole, and the different sections of the 
 
 ### 2. Fixing the servo
 
->The servo was not fully attached to the box for the intake, and Leo is working on making sure that it is secure. It should not need to be fixed any more until the scrimmage, but still needs to be checked on.
+>The servo was not fully attached to the box for the intake, and Leo is working on making sure that it is secure. It should not need to be fixed any more until the scrimmage, but still needs to be checked on. While the box was being tested it broke along the hinges of the flap. Leo is fixing that too.
 
 ### 3. Attaching the brushing mechanism
 
