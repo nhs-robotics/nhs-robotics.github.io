@@ -5,7 +5,7 @@ pubDate: 'Oct 19 2023'
 heroImage: 'Corbin working on computer'
 ---
 10/19/2023
-# Finishing up aspects of robot
+# Finishing Up Aspects of Robot
 
 Our Goal: Make sure that there are no other ideas or things that we need to put onto our robot that has not been started yet, and software continuing to finish CV and april tags.
 
