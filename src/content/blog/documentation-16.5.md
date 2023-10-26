@@ -4,7 +4,7 @@ description: 'First Hardware Catch Up Meeting'
 pubDate: 'Oct 26 2023'
 heroImage: ''
 ---
-10/27/2023
+10/25/2023
 # Extra Meeting
 
 Our Goal: Make a lot of progress on the robot for hardware becase we are behind
