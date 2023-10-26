@@ -4,7 +4,7 @@ description: 'Scrimmage Canceled'
 pubDate: 'Oct 26 2023'
 heroImage: 'stand up meeting'
 ---
-10/26/2023
+10/24/2023
 # Hardware Catch Up Day
 
 Our Goal: Since there is no longer a scrimmage that we are worried about, software is ahead of schedule and they don't have much left to do. Hardware on the other hand has a lot to get done still as they were behind schedule for the scrimmage and still are.
