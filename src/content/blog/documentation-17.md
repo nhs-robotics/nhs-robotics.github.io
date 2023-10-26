@@ -5,40 +5,36 @@ pubDate: 'Oct 26 2023'
 heroImage: 'Mila sketch'
 ---
 10/26/2023
-# Hardware Catch Up Day
+# Hardware Catch Up Day 2
 
-Our Goal: Since there is no longer a scrimmage that we are worried about, software is ahead of schedule and they don't have much left to do. Hardware on the other hand has a lot to get done still as they were behind schedule for the scrimmage and still are.
+Our Goal: Software has nothing left to work on, Hardware has to attach the linear slides and the brushing mechanism, along with test to see if the drone launching mechanism works well or if it needs to be revised.
 
 ## Projects
 
-### 1. Having stand up meeting
+### 1. Putting on linear slides
 
->We are going to meet in room 103, this time to discuss what extra things we have to do with the robot and when the scrimmage will happen. This is unfortunately going to be canceled, so we aren’t really in a rush to get the robot ready. 
+>We attached the two linear slides at an angle so that the arm will go forward to put the pixels on the slanted board. They were not measured precisely for the angle they are at because there will be a joint at the end of it that will angle it as needed.
 
-### 2. Making drone launching system
+### 2. Attaching bar on linear slides
 
->We are going to use a servo that has a circular gear on it that will hook onto a rubber band and stretch it so that when it lets go it will launch the drones out.
+>The bar is used to make the linear slides move together, but we still need to figure out how to make them move outwards. Lilly is looking at different kinds of pulleys to use for a rope set up for the linear slides.
 
-### 3. Attaching the bottom intake for the robot
+### 3. Attaching brush on brushing intake
 
->The bottom intake will be the sweeping mechanism, which is going to stay in one position the whole time.
+>The brush intake is going to be on the bottom of the robot so that it has access to all of the pixels, which makes it easier to put onto the robot. The brush itself is still in progress, but the motor and that axle are all attached.
 
-### 4. Incorporated april tag detection to autonomous
 
->Software worked on putting in the april tag detection code into the autonomous code for the robot as that is important for the robot to do during autonomous.
+### 4. Testing out drone firing mechanism
 
-### 5.  Working on getting the linear slides made
+>We double checked that the drone actually worked well with the mechanism, and how it will be attached onto the robot. We will most likely put it on the side of the robot so that it doesn’t get in the way of the linear slides. The drone firing mechanism works well for now, but it can’t reload unfortunately.
 
->The dimensions for the linear slides have been created, so all there is to do now is to make them and attach them to the robot, which Lilly is doing.
+### 5.  Printing out blue team element and new hexagonal collars
 
-### 6. Redoing collars for hexagonal axle
-
->Cobin was working on 3D designing the collar for the hexagonal axles last meet but he never got to print it out. Unfortunately, they came out too small, so they will have to be redone to the appropriate size.
+>Corbin 3D printed out the team elements that were blue and a bigger version of the hexagonal collars for the axils that should fit on this time.
 
 
 ## Pictures
-[Corbin dening collars]()
-[Corbin and Ian working on linear slides]()
-[Software on computers]()
-[Julian working on robot]()
-[Srikar displaying drone launching mechanism]()
+[Test for drone launching servo]()
+[sketch of drone launching design]()
+[robot with linear slides on it]()
+[robot with bar on]()
