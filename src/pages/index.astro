@@ -1,108 +1,94 @@
 ---
-import BasicLayout from "../layouts/BasicLayout.astro";
----
-<BasicLayout fixed={true}>
-	<img src="/background-low-quality.webp" class="background blur" />
-	
-	<section class="hero">
-		<div class="outer">
-			<div class="inner">
-				<h1>T-10. Forever.</h1>
-				<p>We're a FIRST Tech Challenge (FTC) high school robotics team (#4096) based at Needham High School in Needham, MA.</p>
+import { getCollection } from "astro:content";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import Layout from "../layouts/Layout.astro";
+import LinkButton from "../components/LinkButton.astro";
 
-				<div class="row">
-					<a href="/blog" class="highlighted">Blog</a>
-					<a href="/sponsors">Sponsors</a>
+const posts = (await getCollection("posts")).sort(
+	(a, b) => b.data.published.valueOf() - a.data.published.valueOf(),
+);
+---
+
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<header
+		class="w-full h-screen overflow-auto snap-y snap-mandatory xl:grid grid-cols-2 grid-rows-2"
+	>
+		<div class="xl:row-span-2 card">
+			<div
+				class="w-full h-full absolute top-0 left-0 -z-10 card-image overflow-hidden bg-blue-400"
+			>
+				<img
+					src="/images/header/working.png"
+					alt="A picture of the T-10 members working"
+					class="w-full h-full object-center object-cover brightness-50 transition-transform duration-500"
+				/>
+			</div>
+
+			<h1>We are T-10 Robotics, FTC #4096.</h1>
+
+			<div class="links">
+				<LinkButton href="/about-us"> About us </LinkButton>
+
+				<LinkButton href="/posts"> Our blog </LinkButton>
+			</div>
+		</div>
+
+		<div class="p-16 flex flex-col relative card bg-blue-500">
+			<h1>A special thanks to our sponsors!</h1>
+
+			<div class="links">
+				<LinkButton href="/our-sponsors"> Our Sponsors </LinkButton>
+
+				<LinkButton href="/our-sponsors"> Sponsor us </LinkButton>
+			</div>
+		</div>
+
+		<div class="relative p-16 post card">
+			<div
+				class="w-full h-full absolute top-0 left-0 -z-10 card-image overflow-hidden"
+			>
+				<img
+					src={posts[0].data.hero.image}
+					alt={posts[0].data.hero.alt}
+					class="w-full h-full object-center object-cover brightness-50 transition-transform duration-500"
+				/>
+			</div>
+
+			<div class="text-gray-100 z-30 flex flex-col h-full">
+				<h2>Latest blog post</h2>
+
+				<h1>
+					{posts[0].data.title}
+				</h1>
+
+				<div class="links">
+					<LinkButton href={`/posts/${posts[0].slug}`}>
+						Read
+					</LinkButton>
 				</div>
 			</div>
 		</div>
-	</section>
-</BasicLayout>
-<script>
-	// Load high quality background image asynchronously
-	document.addEventListener('DOMContentLoaded', () => {
-		const background = document.querySelector('.background');
-		const highQualityImage = new Image();
-		highQualityImage.src = '/background-high-quality.webp';
-		highQualityImage.onload = () => {
-			background.src = highQualityImage.src;
-			background.classList.remove('blur');
-		};
-	});
-</script>
+	</header>
+</Layout>
+
 <style>
-	.hero {
-		width: 100%;
-		height: 100vh;
-		color: var(--text-color);
-		
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		z-index: 1;
+	.card:hover .card-image img {
+		@apply scale-110;
 	}
 
-	.outer {
-		display: flex;
+	.card {
+		@apply h-screen xl:h-full snap-start p-8 md:p-16 flex flex-col relative text-gray-100 pb-20;
 	}
 
-	.inner {
-		max-width: 750px;
-		margin: auto;
-		padding: 4rem;
+	.card h1 {
+		@apply font-primary font-black uppercase text-5xl sm:text-6xl mb-4;
 	}
 
-	.row {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
+	.card h2 {
+		@apply font-primary font-bold uppercase text-2xl;
 	}
 
-	.row a {
-		padding: 0.75em 1.5em;
-		text-decoration: none;
-		color: var(--text-color);
-		border: 1px solid var(--text-color);
-	}
-
-	.row a.highlighted {
-		background: var(--text-color);
-		color: var(--background);
-		transition: color 0.15s ease,
-					background 0.15s ease,
-					border 0.15s ease;
-	}
-
-	.row a:hover {
-		--text-color: var(--accent);
-	}
-
-	.background {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
-		object-fit: cover;
-		border-radius: 0;
-		z-index: -1;
-	}
-
-	.background.blur {
-		filter: blur(10px);
-	}
-
-	@media (max-width: 1500px) {
-		.hero {
-			display: flex;
-			text-align: center;
-		}
-
-		.outer {
-			margin: auto;
-		}
-
-		.row {
-			justify-content: center;
-		}
+	.card .links {
+		@apply mt-auto flex items-center gap-4 md:flex-row flex-col;
 	}
 </style>
