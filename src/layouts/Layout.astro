@@ -1,0 +1,22 @@
+---
+import Meta from "../components/Meta.astro";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <Meta title={title} description={description} />
+    <meta property="og:type" content="website" />
+  </head>
+
+  <body class="h-full flex flex-col">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import Footer from "../../components/Footer.astro";
+import ImageText from "../../components/ImageText.astro";
+import Nav from "../../components/Nav.astro";
+import Layout from "../../layouts/Layout.astro";
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+
+const aboutUsSections = await getCollection("aboutUsSections");
+const renderedSectionElements: { [key: string]: AstroComponentFactory } = {};
+for (const aboutUsSection of aboutUsSections) {
+  renderedSectionElements[aboutUsSection.id] = (
+    await aboutUsSection.render()
+  ).Content;
+}
+---
+
+<Layout title="About Us" description="The T-10 Robotics Team">
+  <Nav />
+  <main class="flex-grow px-16 flex h-0">
+    {
+      aboutUsSections
+        .map((aboutUsSection) => {
+          return {
+            ...aboutUsSection,
+            ...{ RenderedElement: renderedSectionElements[aboutUsSection.id] },
+          };
+        })
+        .map((aboutUsSection) => (
+          <ImageText
+            image={aboutUsSection.data.visual.image}
+            imageAlt={aboutUsSection.data.visual.alt}
+            title={aboutUsSection.data.title}
+            textSide="right"
+          >
+            <aboutUsSection.RenderedElement />
+          </ImageText>
+        ))
+    }
+  </main>
+  <Footer />
+</Layout>

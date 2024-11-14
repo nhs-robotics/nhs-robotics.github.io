@@ -1,0 +1,49 @@
+---
+interface Props {
+  image: string;
+  imageAlt: string;
+  title: string;
+  textSide: "left" | "right";
+}
+
+const { image, imageAlt, title, textSide } = Astro.props;
+---
+
+<div
+  class:list={[
+    "w-full flex gap-4 p-4",
+    {
+      "flex-row-reverse": textSide === "left",
+    },
+  ]}
+>
+  <div class="h-full flex-1 flex items-center justify-center">
+    <img
+      src={image}
+      alt={imageAlt}
+      class="image w-full h-full object-cover object-center"
+    />
+  </div>
+  <div class="flex-1">
+    <h1 class="text-5xl mb-4">{title}</h1>
+    <p class="text-xl font-normal">
+      <slot />
+    </p>
+  </div>
+  <style>
+    .image {
+      clip-path: polygon(85% 0%, 100% 50%, 85% 100%, 0% 100%, 15% 50%, 0% 0%);
+      inset: 0.5rem;
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+    }
+
+    .clipper {
+      clip-path: url(#clip_shape);
+    }
+    .dilate {
+      filter: url("#dilate_shape");
+    }
+  </style>
+</div>

@@ -1,0 +1,95 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ImageCard from "./ImageCard.astro";
+import { loadTagNames } from "../content/config";
+import Datetime from "./Datetime.astro";
+
+interface Props {
+  mainPost: CollectionEntry<"posts">;
+  posts: CollectionEntry<"posts">[];
+}
+
+const { mainPost, posts } = Astro.props;
+
+const mainPostTags = await loadTagNames(mainPost.data.tags);
+---
+
+<>
+  <header>
+    <ImageCard
+      class="h-[40rem] w-full"
+      alignment="bottom-left"
+      imageLink={mainPost.data.hero.image}
+      imageAlt={mainPost.data.hero.alt}
+      imageHref={`/posts/${mainPost.slug}`}
+    >
+      <a href={`/posts/${mainPost.slug}`} class="contents">
+        <h1 class="font-primary font-black text-5xl mb-2">
+          {mainPost.data.title}
+        </h1>
+
+        <p class="font-secondary font-medium text-lg mb-4">
+          {mainPost.data.description}
+        </p>
+      </a>
+      <div class="mb-2 md:mb-0">
+        {
+          mainPostTags.map((tag) => (
+            <a
+              href={`/tags/${tag.id}`}
+              class="inline-block text-sm md:text-md border-2 font-medium font-secondary border-white rounded-xl px-3 py-1 hover:bg-white hover:text-black transition-colors duration-150 mr-2 mb-2 md:mr-4 md:mb-4"
+            >
+              {tag.name}
+            </a>
+          ))
+        }
+      </div>
+      <a href={`/posts/${mainPost.slug}`} class="contents">
+        <div class="font-medium font-secondary">
+          <span>
+            Published on
+            <Datetime date={mainPost.data.published} />
+          </span>
+
+          {
+            mainPost.data.updated &&
+              mainPost.data.updated.getTime() !==
+                mainPost.data.published.getTime() && (
+                <>
+                  <span>&bullet;</span>
+
+                  <span>
+                    Updated on
+                    <Datetime date={mainPost.data.updated} />
+                  </span>
+                </>
+              )
+          }
+        </div>
+      </a>
+    </ImageCard>
+  </header>
+
+  <section>
+    <ul class="grid grid-cols-2 gap-8">
+      {
+        posts.slice(1).map((post) => (
+          <li>
+            <ImageCard
+              class="h-full w-full"
+              alignment="bottom-left"
+              imageLink={post.data.hero.image}
+              imageAlt={post.data.hero.alt}
+              imageHref={`/posts/${post.slug}`}
+            >
+              <h4 class="text-2xl font-semibold">{post.data.title}</h4>
+              <p class="date text-lg">
+                <Datetime date={post.data.published} />
+              </p>
+            </ImageCard>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</>

@@ -1,0 +1,55 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  alignment: "bottom-right" | "bottom-left" | "top-left" | "top-right";
+  imageLink: string;
+  imageHref?: string;
+  imageAlt: string;
+  class?: string;
+}
+
+const {
+  alignment,
+  imageLink,
+  imageHref,
+  imageAlt,
+  class: classList,
+} = Astro.props;
+
+const alignmentClass =
+  alignment === "bottom-left"
+    ? "justify-start content-end"
+    : alignment === "bottom-right"
+      ? "justify-end content-end"
+      : alignment === "top-left"
+        ? "justify-start content-start"
+        : alignment === "top-right"
+          ? "justify-end content-start"
+          : "";
+---
+
+<span class="relative">
+  <a href={imageHref}>
+    <img
+      class:list={[
+        "object-cover object-center rounded-xl brightness-75 flex",
+        classList ?? "",
+      ]}
+      src={imageLink}
+      alt={imageAlt}
+    />
+  </a>
+
+  <span
+    class:list={[
+      "absolute w-full h-full top-0 left-0 px-10 py-6 flex flex-wrap pointer-events-none",
+      alignmentClass,
+    ]}
+  >
+    <span class="w-max h-min text-white pointer-events-auto">
+      <slot />
+    </span>
+  </span>
+  <span></span></span
+>

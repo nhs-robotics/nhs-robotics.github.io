@@ -1,0 +1,29 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import TagLayout from "../../layouts/TagLayout.astro";
+
+export async function getStaticPaths() {
+  const tags = await getCollection("tags");
+  const posts = await getCollection("posts");
+
+  return tags.map((tag) => ({
+    params: {
+      slug: tag.id,
+    },
+    props: {
+      tag,
+      posts: posts.filter(post => post.data.tags.map(tag => tag.id).includes(tag.id))
+    },
+  }));
+}
+
+interface Props {
+  tag: CollectionEntry<"tags">,
+  posts: CollectionEntry<"posts">[]
+};
+
+const tags = Astro.props;
+const { tag, posts } = tags;
+---
+<TagLayout posts={posts} tag={tag} />
+

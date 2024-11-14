@@ -1,0 +1,18 @@
+---
+import Footer from "../components/Footer.astro";
+import LinkButton from "../components/LinkButton.astro";
+import Nav from "../components/Nav.astro";
+import Layout from "../layouts/Layout.astro";
+---
+<Layout title="Not found!" description="We can't find what your looking for ;(">
+    <Nav />
+    <main class="flex-grow px-16 flex h-0">
+        <span class="h-min">
+            <h1 class="text-9xl mb-10 text-red-500">404</h1>
+            <h1 class="text-5xl mb-10">We can't find what your looking for!</h1>
+            <LinkButton color="danger" href="/">Go Back Home</LinkButton>
+        </span>
+        <img src={"/images/robot404page.png"} alt="A sad robot" class="w-1/2 object-contain" />
+    </main>
+    <Footer />
+</Layout>

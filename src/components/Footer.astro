@@ -1,37 +1,23 @@
 ---
+import { getImage } from "astro:assets";
 import { SITE_TITLE } from "../consts";
-import SocialLinks from "./SocialLinks.astro";
+
 const today = new Date();
+
+import logoImage from "../../public/images/favicon/black.png";
 ---
 
-<footer>
-	&copy; {today.getFullYear()} {SITE_TITLE}. All rights reserved.
-	
-	<div class="social-links">
-		<SocialLinks />
-	</div>
-</footer>
-<style>
-	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
-		text-align: center;
-	}
-	
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
-	}
-	
-	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
-	}
+<footer
+  class="bg-gray-800 mt-4 h-20 mx-auto w-full text-white relative overflow-hidden"
+>
+  <img
+    src={logoImage.src}
+    class="invert h-[150%] absolute top-1/2 -translate-y-1/2 left-10 opacity-50"
+    alt="T-10 Robotics logo"
+  />
 
-	.social-links a:hover {
-		color: rgb(var(--gray-dark));
-	}
-</style>
+  <div class="flex items-center w-full h-full p-4">
+    &copy; {today.getFullYear()}
+    {SITE_TITLE}. All rights reserved.
+  </div>
+</footer>

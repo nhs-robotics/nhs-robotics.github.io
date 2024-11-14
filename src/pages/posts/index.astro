@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import Datetime from "../../components/Datetime.astro";
+import Footer from "../../components/Footer.astro";
+import Meta from "../../components/Meta.astro";
+import Nav from "../../components/Nav.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import { loadTagNames } from "../../content/config";
+import ImageCard from "../../components/ImageCard.astro";
+import PostList from "../../components/PostList.astro";
+
+const posts = (await getCollection("posts")).sort(
+  (a, b) => b.data.published.valueOf() - a.data.published.valueOf(),
+);
+
+const first = posts[0];
+
+const tagNames = await loadTagNames(first.data.tags);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Meta title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Nav />
+
+    <main class="max-w-7xl mx-auto flex flex-col align-bottom gap-8 px-2">
+      <PostList mainPost={first} posts={posts} />
+    </main>
+
+    <Footer />
+  </body>
+</html>
+
+<style></style>
