@@ -1,7 +1,7 @@
 import path from "path";
 export function dynamicViteAssetImport(imageFileName: string) {
   const filename = path.parse(`../public/${imageFileName}`);
-  const name = filename.name;
+  const name = imageFileName.replace(/\.[^/.]+$/, "");
   const ext = filename.ext;
   switch (ext) {
     case ".webp":
