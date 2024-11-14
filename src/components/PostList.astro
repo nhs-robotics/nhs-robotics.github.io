@@ -19,7 +19,7 @@ const mainPostTags = await loadTagNames(mainPost.data.tags);
     <ImageCard
       class="h-[40rem] w-full"
       alignment="bottom-left"
-      imageLink={`images/posts/${mainPost.data.hero.image}`}
+      imageLink={mainPost.data.hero.image}
       imageAlt={mainPost.data.hero.alt}
       imageHref={`/posts/${mainPost.slug}`}
     >
@@ -78,7 +78,7 @@ const mainPostTags = await loadTagNames(mainPost.data.tags);
             <ImageCard
               class="h-full w-full"
               alignment="bottom-left"
-              imageLink={`images/posts/${post.data.hero.image}`}
+              imageLink={post.data.hero.image}
               imageAlt={post.data.hero.alt}
               imageHref={`/posts/${post.slug}`}
             >

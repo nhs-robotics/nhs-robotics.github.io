@@ -4,7 +4,7 @@ description: A Markdown style guide for you.
 published: 2024-10-13T19:32:00.000Z
 updated: 2024-10-13T19:33:00.000Z
 hero:
-  image: hello-markdown/hero/image.png
+  image: /public/images/posts/hello-markdown/hero/image.png
   alt: A city street
 tags:
   - coding

@@ -8,9 +8,6 @@ import { Image } from "astro:assets";
 const posts = (await getCollection("posts")).sort(
   (a, b) => b.data.published.valueOf() - a.data.published.valueOf(),
 );
-
-import workingImage from "../../public/images/header/working.png";
-import { dynamicViteAssetImport } from "../dynamicViteAssetImport";
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -21,8 +18,8 @@ import { dynamicViteAssetImport } from "../dynamicViteAssetImport";
       <div
         class="w-full h-full absolute top-0 left-0 -z-10 card-image overflow-hidden bg-blue-400"
       >
-        <Image
-          src={workingImage}
+        <img
+          src={"/public/images/header/working.png"}
           alt="A picture of the T-10 members working"
           class="w-full h-full object-center object-cover brightness-50 transition-transform duration-500"
         />
@@ -51,8 +48,8 @@ import { dynamicViteAssetImport } from "../dynamicViteAssetImport";
       <div
         class="w-full h-full absolute top-0 left-0 -z-10 card-image overflow-hidden"
       >
-        <Image
-          src={dynamicViteAssetImport(`images/posts/${posts[0].data.hero.image}`)}
+        <img
+          src={posts[0].data.hero.image}
           alt={posts[0].data.hero.alt}
           class="w-full h-full object-center object-cover brightness-50 transition-transform duration-500"
         />

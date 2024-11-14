@@ -3,9 +3,6 @@ import Footer from "../components/Footer.astro";
 import LinkButton from "../components/LinkButton.astro";
 import Nav from "../components/Nav.astro";
 import Layout from "../layouts/Layout.astro";
-
-import robotNotFoundImage from "../../public/images/robot404page.png"
-import { Image } from "astro:assets";
 ---
 <Layout title="Not found!" description="We can't find what your looking for ;(">
     <Nav />
@@ -15,7 +12,7 @@ import { Image } from "astro:assets";
             <h1 class="text-5xl mb-10">We can't find what your looking for!</h1>
             <LinkButton color="danger" href="/">Go Back Home</LinkButton>
         </span>
-        <Image src={robotNotFoundImage} alt="A sad robot" class="w-1/2 object-contain" />
+        <img src={"/public/images/robot404page.png"} alt="A sad robot" class="w-1/2 object-contain" />
     </main>
     <Footer />
 </Layout>
