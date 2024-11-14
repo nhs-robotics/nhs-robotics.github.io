@@ -3,92 +3,93 @@ import { getCollection } from "astro:content";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import Layout from "../layouts/Layout.astro";
 import LinkButton from "../components/LinkButton.astro";
+import { Image } from "astro:assets";
 
 const posts = (await getCollection("posts")).sort(
-	(a, b) => b.data.published.valueOf() - a.data.published.valueOf(),
+  (a, b) => b.data.published.valueOf() - a.data.published.valueOf(),
 );
+
+import workingImage from "../../public/images/header/working.png";
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-	<header
-		class="w-full h-screen overflow-auto snap-y snap-mandatory xl:grid grid-cols-2 grid-rows-2"
-	>
-		<div class="xl:row-span-2 card">
-			<div
-				class="w-full h-full absolute top-0 left-0 -z-10 card-image overflow-hidden bg-blue-400"
-			>
-				<img
-					src="/images/header/working.png"
-					alt="A picture of the T-10 members working"
-					class="w-full h-full object-center object-cover brightness-50 transition-transform duration-500"
-				/>
-			</div>
+  <header
+    class="w-full h-screen overflow-auto snap-y snap-mandatory xl:grid grid-cols-2 grid-rows-2"
+  >
+    <div class="xl:row-span-2 card">
+      <div
+        class="w-full h-full absolute top-0 left-0 -z-10 card-image overflow-hidden bg-blue-400"
+      >
+        <Image
+          src={workingImage}
+          alt="A picture of the T-10 members working"
+          class="w-full h-full object-center object-cover brightness-50 transition-transform duration-500"
+        />
+      </div>
 
-			<h1>We are T-10 Robotics, FTC #4096.</h1>
+      <h1>We are T-10 Robotics, FTC #4096.</h1>
 
-			<div class="links">
-				<LinkButton href="/about-us"> About us </LinkButton>
+      <div class="links">
+        <LinkButton href="/about-us"> About us </LinkButton>
 
-				<LinkButton href="/posts"> Our blog </LinkButton>
-			</div>
-		</div>
+        <LinkButton href="/posts"> Our blog </LinkButton>
+      </div>
+    </div>
 
-		<div class="p-16 flex flex-col relative card bg-blue-500">
-			<h1>A special thanks to our sponsors!</h1>
+    <div class="p-16 flex flex-col relative card bg-blue-500">
+      <h1>A special thanks to our sponsors!</h1>
 
-			<div class="links">
-				<LinkButton href="/our-sponsors"> Our Sponsors </LinkButton>
+      <div class="links">
+        <LinkButton href="/our-sponsors"> Our Sponsors </LinkButton>
 
-				<LinkButton href="/our-sponsors"> Sponsor us </LinkButton>
-			</div>
-		</div>
+        <LinkButton href="/our-sponsors"> Sponsor us </LinkButton>
+      </div>
+    </div>
 
-		<div class="relative p-16 post card">
-			<div
-				class="w-full h-full absolute top-0 left-0 -z-10 card-image overflow-hidden"
-			>
-				<img
-					src={posts[0].data.hero.image}
-					alt={posts[0].data.hero.alt}
-					class="w-full h-full object-center object-cover brightness-50 transition-transform duration-500"
-				/>
-			</div>
+    <div class="relative p-16 post card">
+      <div
+        class="w-full h-full absolute top-0 left-0 -z-10 card-image overflow-hidden"
+      >
+        <Image
+          src={import(`/public/images/posts/${posts[0].data.hero.image}`)}
+          alt={posts[0].data.hero.alt}
+          class="w-full h-full object-center object-cover brightness-50 transition-transform duration-500"
+        />
+      </div>
 
-			<div class="text-gray-100 z-30 flex flex-col h-full">
-				<h2>Latest blog post</h2>
+      <div class="text-gray-100 z-30 flex flex-col h-full">
+        <h2>Latest blog post</h2>
 
-				<h1>
-					{posts[0].data.title}
-				</h1>
+        <h1>
+          {posts[0].data.title}
+        </h1>
 
-				<div class="links">
-					<LinkButton href={`/posts/${posts[0].slug}`}>
-						Read
-					</LinkButton>
-				</div>
-			</div>
-		</div>
-	</header>
+        <div class="links">
+          <LinkButton href={`/posts/${posts[0].slug}`}> Read </LinkButton>
+        </div>
+      </div>
+    </div>
+  </header>
 </Layout>
 
 <style>
-	.card:hover .card-image img {
-		@apply scale-110;
-	}
+  .card:hover .card-image img {
+    @apply scale-110;
+  }
 
-	.card {
-		@apply h-screen xl:h-full snap-start p-8 md:p-16 flex flex-col relative text-gray-100 pb-20;
-	}
+  .card {
+    @apply h-screen xl:h-full snap-start p-8 md:p-16 flex flex-col relative text-gray-100 pb-20;
+  }
 
-	.card h1 {
-		@apply font-primary font-black uppercase text-5xl sm:text-6xl mb-4;
-	}
+  .card h1 {
+    @apply font-primary font-black uppercase text-4xl sm:text-6xl xl:text-5xl 2xl:text-6xl mb-4;
+  }
 
-	.card h2 {
-		@apply font-primary font-bold uppercase text-2xl;
-	}
+  .card h2 {
+    @apply font-primary font-bold uppercase text-2xl;
+  }
 
-	.card .links {
-		@apply mt-auto flex items-center gap-4 md:flex-row flex-col;
-	}
+  .card .links {
+    @apply mt-auto flex items-center gap-4 md:flex-row flex-col;
+  }
 </style>

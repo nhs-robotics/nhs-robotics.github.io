@@ -1,91 +1,37 @@
 ---
-import { getCollection } from 'astro:content';
-import Datetime from '../../components/Datetime.astro';
-import Footer from '../../components/Footer.astro';
-import Meta from '../../components/Meta.astro';
-import Nav from '../../components/Nav.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
-import { loadTagNames } from '../../content/config';
+import { getCollection } from "astro:content";
+import Datetime from "../../components/Datetime.astro";
+import Footer from "../../components/Footer.astro";
+import Meta from "../../components/Meta.astro";
+import Nav from "../../components/Nav.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import { loadTagNames } from "../../content/config";
+import ImageCard from "../../components/ImageCard.astro";
+import PostList from "../../components/PostList.astro";
 
-const posts = (await getCollection('posts')).sort(
-	(a, b) => b.data.published.valueOf() - a.data.published.valueOf(),
+const posts = (await getCollection("posts")).sort(
+  (a, b) => b.data.published.valueOf() - a.data.published.valueOf(),
 );
 
 const first = posts[0];
+
+const tagNames = await loadTagNames(first.data.tags);
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<Meta title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Nav />
+  <head>
+    <Meta title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Nav />
 
-		<main class="max-w-7xl mx-auto flex flex-col gap-8">
-			<a href={`/posts/${first.slug}`}>
-			<header class="relative">
-					<img class="h-[40rem] w-full rounded-xl object-cover object-center brightness-75" src={first.data.hero.image} alt={first.data.hero.alt} />
-	
-					<div class="absolute bottom-10 px-6 md:px-10 xl:bottom-20 xl:px-20 text-white">
-						<h1 class="font-primary font-black text-5xl mb-2">
-							{first.data.title}
-						</h1>
-	
-						<p class="font-secondary font-medium text-lg mb-4">{first.data.description}</p>
-	
-						<div class="mb-2 md:mb-0">
-							{ (await loadTagNames(first.data.tags)).map(tag => (
-								<a href={`/tags/${tag.id}`} class="inline-block text-sm md:text-md border-2 font-medium font-secondary border-white rounded-xl px-3 py-1 hover:bg-white hover:text-black transition-colors duration-150 mr-2 mb-2 md:mr-4 md:mb-4">
-									{tag.name}
-								</a>
-							)) }
-						</div>
-	
-						<div class="font-medium font-secondary">
-							<span>
-								Published on
-								<Datetime date={first.data.published} />
-							</span>
-	
-							{
-								(first.data.updated && first.data.updated.getTime() !== first.data.published.getTime()) && (
-									<span>&bullet;</span>
-	
-									<span>
-										Updated on
-										<Datetime date={first.data.updated} />
-									</span>
-								)
-							}
-						</div>
-					</div>
-				</header>
-			</a>
+    <main class="max-w-7xl mx-auto flex flex-col align-bottom gap-8 px-2">
+      <PostList mainPost={first} posts={posts} />
+    </main>
 
-			<section>
-				<ul class="grid grid-cols-2 gap-8">
-					{
-						posts.slice(1).map((post) => (
-							<li>
-								<a href={`/posts/${post.slug}/`}>
-									<img class="rounded-xl" src={post.data.hero.image} src={post.data.hero.alt} />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<Datetime date={post.data.published} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-
-		<Footer />
-	</body>
+    <Footer />
+  </body>
 </html>
 
-<style>
-	
-</style>
+<style></style>

@@ -1,13 +1,23 @@
 ---
+import { getImage } from "astro:assets";
 import { SITE_TITLE } from "../consts";
 
 const today = new Date();
+
+import logoImage from "../../public/images/favicon/black.png";
 ---
 
-<footer class="bg-gray-800 my-4 p-8 mx-auto max-w-[96rem] rounded-xl text-white relative">
-	<img src="/images/favicon/black.png" class="invert h-[150%] absolute top-1/2 -translate-y-1/2 left-2 opacity-50" alt="T-10 Robotics logo" />
+<footer
+  class="bg-gray-800 mt-4 h-20 mx-auto w-full text-white relative overflow-hidden"
+>
+  <img
+    src={logoImage.src}
+    class="invert h-[150%] absolute top-1/2 -translate-y-1/2 left-10 opacity-50"
+    alt="T-10 Robotics logo"
+  />
 
-	<div>
-		&copy; {today.getFullYear()} {SITE_TITLE}. All rights reserved.
-	</div>
+  <div class="flex items-center w-full h-full p-4">
+    &copy; {today.getFullYear()}
+    {SITE_TITLE}. All rights reserved.
+  </div>
 </footer>

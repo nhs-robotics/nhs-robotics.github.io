@@ -9,219 +9,232 @@ import Nav from "../components/Nav.astro";
 import { collections, loadTagNames } from "../content/config";
 import { SITE_TITLE } from "../consts";
 import { getCollection } from "astro:content";
+import TableOfContents from "../components/TableOfContents.astro";
+import { Image } from "astro:assets";
 
 type Props =
-	| CollectionEntry<"posts">["data"] & { headings: MarkdownHeading[] }
-	| MarkdownLayoutProps<CollectionEntry<"posts">["data"]>;
+  | (CollectionEntry<"posts">["data"] & { headings: MarkdownHeading[] })
+  | MarkdownLayoutProps<CollectionEntry<"posts">["data"]>;
 
-const { title, description, published, updated, hero, tags } =
-	"file" in Astro.props
-		? (() => {
-				const schema = collections.posts.schema as ZodSchema;
-				const parsed = schema.parse(Astro.props.frontmatter);
+const { title, description, published, updated, hero, tags, hideElements }: CollectionEntry<"posts">["data"] =
+  "file" in Astro.props
+    ? (() => {
+        const schema = collections.posts.schema as ZodSchema;
+        const parsed = schema.parse(Astro.props.frontmatter);
 
-				return parsed;
-			})()
-		: Astro.props;
+        return parsed;
+      })()
+    : Astro.props;
 
 const headings = Astro.props.headings as MarkdownHeading[];
 const loadedTags = await loadTagNames(tags);
-const recommendedPosts = (await getCollection("posts")).filter(x => x.data.title !== title).sort(() => Math.random() - 0.5).slice(0, 4);
+const recommendedPosts = (await getCollection("posts"))
+  .filter((x) => x.data.title !== title)
+  .sort(() => Math.random() - 0.5)
+  .slice(0, 4);
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<Meta
-			title={`${title} | ${SITE_TITLE}`}
-			description={description}
-			image={hero.image}
-		/>
-		<meta
-			property="article:published_time"
-			content={published.toISOString()}
-		/>
-		<meta
-			property="article:modified_time"
-			content={updated.toISOString()}
-		/>
-		<meta property="og:type" content="article" />
-	</head>
+  <head>
+    <Meta
+      title={`${title} | ${SITE_TITLE}`}
+      description={description}
+      image={hero.image}
+    />
+    <meta property="article:published_time" content={published.toISOString()} />
+    <meta property="article:modified_time" content={updated.toISOString()} />
+    <meta property="og:type" content="article" />
+  </head>
 
-	<body>
-		<Nav />
+  <body>
+    <Nav />
 
-		<main class="mx-auto max-w-[96rem]">
-			<header>
-				<img src={hero.image} alt={hero.alt} />
+    <Image class="heroImage" src={import(`/public/images/posts/${hero.image}`)} alt={hero.alt} />
 
-				<div class="absolute bottom-10 px-6 md:px-10 xl:bottom-20 xl:px-20 text-white">
-					<h1 class="font-primary font-black text-5xl md:text-6xl mb-2">
-						{title}
-					</h1>
+    <main class="mx-auto max-w-[96rem]">
+      <header>
+        <div
+          class="absolute bottom-10 left-0 px-6 xl:bottom-20 xl:px-20 text-white"
+        >
+          <h1 class="font-primary font-black text-5xl md:text-6xl mb-2">
+            {title}
+          </h1>
 
-					<p class="font-secondary font-medium text-lg md:text-xl lg:text-2xl mb-4">{description}</p>
+          <p
+            class="font-secondary font-medium text-lg md:text-xl lg:text-2xl mb-4"
+          >
+            {description}
+          </p>
 
-					<div class="mb-2 md:mb-0">
-						{ loadedTags.map(tag => (
-							<a href={`/tags/${tag.id}`} class="inline-block text-sm md:text-md border-2 font-medium font-secondary border-white rounded-xl px-3 py-1 hover:bg-white hover:text-black transition-colors duration-150 mr-2 mb-2 md:mr-4 md:mb-4">
-								{tag.name}
-							</a>
-						)) }
-					</div>
+          <div class="mb-2 md:mb-0">
+            {
+              loadedTags.map((tag) => (
+                <a
+                  href={`/tags/${tag.id}`}
+                  class="inline-block text-sm md:text-md border-2 font-medium font-secondary border-white rounded-xl px-3 py-1 hover:bg-white hover:text-black transition-colors duration-150 mr-2 mb-2 md:mr-4 md:mb-4"
+                >
+                  {tag.name}
+                </a>
+              ))
+            }
+          </div>
 
-					<div class="font-medium font-secondary">
-						<span>
-							Published on
-							<Datetime date={published} />
-						</span>
+          <div class="font-medium font-secondary">
+            <span>
+              Published on
+              <Datetime date={published} />
+            </span>
 
-						{
-							(updated && updated.getTime() !== published.getTime()) && (
-								<span>&bullet;</span>
+            {
+              updated && updated.getTime() !== published.getTime() && (
+                <>
+                  <span>&bullet;</span>
 
-								<span>
-									Updated on
-									<Datetime date={updated} />
-								</span>
-							)
-						}
-					</div>
-				</div>
-			</header>
+                  <span>
+                    Updated on
+                    <Datetime date={updated} />
+                  </span>
+                </>
+              )
+            }
+          </div>
+        </div>
+      </header>
 
-			<div class="2xl:grid grid-cols-content gap-4 mx-auto">
-				<article class="font-secondary">
-					<slot />
-				</article>
+      <div class="lg:grid grid-cols-content gap-4 mx-auto">
+        <article class="font-secondary px-6 xl:px-10">
+          <slot />
+        </article>
 
-				<div class="hidden 2xl:block">
-					<div class="sticky top-24">
-						<div class="mb-8">
-							<p class="font-primary font-bold uppercase mb-1 tracking-wider">Contents</p>
-							<ol>
-								{
-									headings.map(heading => (
-										<li class="mb-1">
-											<a class="font-secondary text-lg" href={`#${heading.slug}`}>
-												{heading.text}
-											</a>
-										</li>	
-									) )
-								}
-							</ol>
-						</div>
+        <div class:list={[{"hidden": hideElements.recommended || hideElements.tableOfContents}, "lg:block pr-6"]}>
+          <div class="sticky top-24">
+            {!hideElements.tableOfContents && (<div class="mb-8">
+              <TableOfContents pageHeadings={headings} />
+            </div>)}
+            {!hideElements.recommended && (
+              <span>
+                <p class="font-primary font-bold uppercase mb-1 tracking-wider">
+                  Recommended
+                </p>
 
-						<p class="font-primary font-bold uppercase mb-1 tracking-wider">Recommended</p>
+                {
+                  recommendedPosts.map((post) => (
+                    <a href={`/posts/${post.slug}`}>
+                      <div class="grid grid-cols-[4rem_4fr] gap-2 items-center mb-4 rounded-xl border overflow-hidden hover:bg-white hover:border-black transition-colors duration-150">
+                        <Image
+                          src={import(`/public/images/posts/${post.data.hero.image}`)}
+                          alt={post.data.hero.alt}
+                          class="object-cover object-center w-16 h-16"
+                        />
 
-						{
-							recommendedPosts.map(post => (
-								<a href={`/posts/${post.slug}`}>
-									<div class="grid grid-cols-[4rem_4fr] gap-2 items-center mb-4 rounded-xl border overflow-hidden hover:bg-white hover:border-black transition-colors duration-150">
-										<img src={post.data.hero.image} alt={post.data.hero.alt} class="object-cover object-center w-16 h-16" />
+                        <div>
+                          <h3 class="font-secondary font-bold">
+                            {post.data.title}
+                          </h3>
+                          <p class="text-sm overflow-ellipsis">
+                            {post.data.description}
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  ))
+                }
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+    </main>
 
-										<div>
-											<h3 class="font-secondary font-bold">{post.data.title}</h3>
-											<p class="text-sm">{post.data.description.substring(0, 60).trim()}...</p>
-										</div>
-									</div>
-								</a>
-							) )
-						}
-
-					</div>
-				</div>
-			</div>
-		</main>
-
-		<Footer />
-	</body>
+    <Footer />
+  </body>
 </html>
 
 <style is:global>
-	.grid-cols-content {
-		grid-template-columns: 1fr 32rem;	
-	}
+  .grid-cols-content {
+    grid-template-columns: 1fr 32rem;
+  }
 
-	header {
-		position: relative;
-		width: 100%;
-		max-height: 75vh;
-		@apply mb-8 lg:px-4;
-	}
+  header {
+    position: relative;
+    width: 100%;
+    max-height: 75vh;
+    @apply mb-8 lg:px-4;
+  }
 
-	header img {
-		@apply object-cover object-center w-full h-[75vh] lg:max-h-[80rem] brightness-50 rounded-b-2xl lg:rounded-t-2xl;
-	}
+  .heroImage {
+    @apply object-cover object-center w-full h-[75vh] lg:max-h-[80rem] brightness-50;
+  }
 
-	article {
-		@apply px-4 max-w-[100vw];
-	}
+  article {
+    @apply px-4 max-w-[100vw];
+  }
 
-	article h1 {
-		@apply text-6xl font-black mb-2;
-	}
+  article h1 {
+    @apply text-6xl font-black mb-2;
+  }
 
-	article h2 {
-		@apply text-4xl font-black mb-2;
-	}
+  article h2 {
+    @apply text-4xl font-black mb-2;
+  }
 
-	article h3 {
-		@apply text-3xl font-black mb-2;
-	}
+  article h3 {
+    @apply text-3xl font-black mb-2;
+  }
 
-	article h4 {
-		@apply text-2xl font-black mb-2;
-	}
+  article h4 {
+    @apply text-2xl font-black mb-2;
+  }
 
-	article h5 {
-		@apply text-xl font-black mb-2;
-	}
+  article h5 {
+    @apply text-xl font-black mb-2;
+  }
 
-	article h6 {
-		@apply text-lg font-black mb-2;
-	}
+  article h6 {
+    @apply text-lg font-black mb-2;
+  }
 
-	article p {
-		@apply text-lg mb-4;
-	}
+  article p {
+    @apply text-lg mb-4;
+  }
 
-	article a {
-		@apply text-blue-500;
-	}
+  article a {
+    @apply text-blue-500;
+  }
 
-	article a:hover {
-		@apply text-blue-300;
-	}
+  article a:hover {
+    @apply text-blue-300;
+  }
 
-	article .astro-code {
-		@apply p-4 rounded mb-4 overflow-auto w-full;
-	}
+  article .astro-code {
+    @apply p-4 rounded mb-4 overflow-auto w-full;
+  }
 
-	article ol {
-		@apply mb-4 ml-8 text-lg;
-		list-style: decimal;
-	}
+  article ol {
+    @apply mb-4 ml-8 text-lg;
+    list-style: decimal;
+  }
 
-	article ul {
-		@apply mb-4 ml-8 text-lg;
-		list-style: disc;
-	}
+  article ul {
+    @apply mb-4 ml-8 text-lg;
+    list-style: disc;
+  }
 
-	article li {
-		@apply mb-2;
-	}
+  article li {
+    @apply mb-2;
+  }
 
-	article ul ul {
-		@apply ml-4 mb-0;
-		list-style-type: circle;
-	}
+  article ul ul {
+    @apply ml-4 mb-0;
+    list-style-type: circle;
+  }
 
-	article img {
-		@apply rounded;
-	}
+  article img {
+    @apply rounded;
+  }
 
-	article :not(.astro-code) > code {
-		@apply bg-gray-800 text-white p-1 rounded;
-	}
+  article :not(.astro-code) > code {
+    @apply bg-gray-800 text-white p-1 rounded;
+  }
 </style>

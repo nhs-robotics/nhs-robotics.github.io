@@ -1,5 +1,5 @@
 ---
-title: 'A New Chapter: Welcome to the New T-10'
+title: "A New Chapter: Welcome to the New T-10"
 description: >-
   T-10, Needham High School's FTC robotics team, kicks off the season with a new
   website, expanded GitHub resources for software and hardware, and a fresh team
@@ -8,12 +8,13 @@ description: >-
 published: 2024-10-14T12:29:00.000Z
 updated: 2024-10-14T12:29:00.000Z
 hero:
-  image: /images/posts/a-new-chapter-welcome-to-the-new-t-10/hero/image.jpg
+  image: a-new-chapter-welcome-to-the-new-t-10/hero/image.jpg
   alt: A picture of the horizon with beautiful, lush, Swiss mountains
 tags:
   - coding
   - hardware
 ---
+
 The T-10 robotics team at Needham High School is entering an exciting new chapter! With a revamped website, a new team of talented individuals, and cutting-edge technology, we’re ready to take this season by storm. Here’s a deeper dive into what’s new for us this year.
 
 ### A New Team for a New Season

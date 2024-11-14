@@ -1,0 +1,71 @@
+---
+export interface Props {
+  pageHeadings: Array<{ depth: number; text: string; slug: string }>;
+}
+
+const { pageHeadings } = Astro.props;
+---
+
+<div id="table-of-contents">
+  <nav>
+    <h2 class="mb-4 font-medium uppercase tracking-widest">Contents</h2>
+    <ul class="space-y-4 text-sm">
+      {
+        pageHeadings.map((header) => {
+          return (
+            header.depth < 4 && (
+              <li
+                class:list={[
+                  "hover:text-neutral-600",
+                  { "text-[15px] ": header.depth === 2 },
+                  { "ml-4 text-[14px]": header.depth === 3 },
+                ]}
+              >
+                <a href={`#${header.slug}`} class="line-clamp-1">
+                  {header.text}
+                </a>
+              </li>
+            )
+          );
+        })
+      }
+    </ul>
+  </nav>
+</div>
+
+<style>
+  .active {
+    @apply font-semibold;
+  }
+</style>
+<script>
+  const setCurrent: IntersectionObserverCallback = (entries) => {
+    for (let entry of entries) {
+      const { id } = entry.target;
+
+      const tableOfContentsHeadingElement = document.querySelector(
+        `#table-of-contents a[href="#${id}"]`,
+      );
+
+      if (!tableOfContentsHeadingElement) return;
+      
+      if (entry.isIntersecting) {
+        document
+          .querySelectorAll("#table-of-contents a")
+          .forEach((e) => e.classList.remove("active"));
+        tableOfContentsHeadingElement.classList.add("active");
+      }
+    }
+  };
+
+  const observerOption: IntersectionObserverInit = {
+    rootMargin: "0px 0px 0px",
+    threshold: 0,
+  };
+
+  const headingObserver = new IntersectionObserver(setCurrent, observerOption);
+
+  document
+    .querySelectorAll("article :is(h2,h3,h4)")
+    .forEach((heading) => headingObserver.observe(heading));
+</script>

@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Meta from "../components/Meta.astro";
+import { SITE_TITLE } from "../consts";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import Datetime from "../components/Datetime.astro";
+import { Image } from "astro:assets";
+import PostList from "../components/PostList.astro";
+
+interface Props {
+  tag: CollectionEntry<"tags">;
+  posts: CollectionEntry<"posts">[];
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <Meta
+      title={`${tag.data.name} | ${SITE_TITLE}`}
+      description={tag.data.name}
+    />
+  </head>
+
+  <body class="h-full flex flex-col">
+    <Nav />
+
+    <main class="mx-auto max-w-7xl flex-grow">
+      <header class="mb-4 mx-2">
+        <h1 class="text-6xl font-thin w-full flex justify-center align-middle">
+          {tag.data.name}
+        </h1>
+        <hr class="max-w-7xl border-1 border-black h-1 mx-auto" />
+      </header>
+
+      <div class="max-w-7xl mx-auto flex flex-col align-bottom px-2 gap-8">
+        <PostList mainPost={posts[0]} posts={posts} />
+      </div>
+    </main>
+
+    <span>
+      <Footer />
+    </span>
+  </body>
+</html>
