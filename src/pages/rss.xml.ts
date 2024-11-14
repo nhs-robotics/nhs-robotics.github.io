@@ -11,7 +11,10 @@ export async function GET(context: APIContext) {
     description: SITE_DESCRIPTION,
     site: context.site!,
     items: posts.map((post) => ({
-      ...post.data,
+      title: post.data.title,
+      pubDate: post.data.published,
+      categories: post.data.tags.map(tag => tag.id),
+      description: post.data.description,
       link: `/posts/${post.slug}`,
     })),
   });
