@@ -5,20 +5,20 @@ export function dynamicViteAssetImport(imageFileName: string) {
   const ext = filename.ext;
   switch (ext) {
     case ".webp":
-      return import(`../public/${name}.webp`);
+      return Object.values(import.meta.glob(`../public/${name}.webp`))[0];
     case ".jpg":
-      return import(`../public/${name}.jpg`);
+      return Object.values(import.meta.glob(`../public/${name}.jpg`))[0];
     case ".png":
-      return import(`../public/${name}.png`);
+      return Object.values(import.meta.glob(`../public/${name}.png`))[0];
     case ".svg":
-      return import(`../public/${name}.svg`);
+      return Object.values(import.meta.glob(`../public/${name}.svg`))[0];
     case ".gif":
-      return import(`../public/${name}.gif`);
+      return Object.values(import.meta.glob(`../public/${name}.gif`))[0];
     case ".avif":
-      return import(`../public/${name}.avif`);
+      return Object.values(import.meta.glob(`../public/${name}.avif`))[0];
     case ".jpeg":
-      return import(`../public/${name}.jpeg`);
+      return Object.values(import.meta.glob(`../public/${name}.jpeg`))[0];
     default:
-      return import(`../public/${name}.jpg`);
+      return Object.values(import.meta.glob(`../public/${name}.jpg`))[0];
   }
 }
