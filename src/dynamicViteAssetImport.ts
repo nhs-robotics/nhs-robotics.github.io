@@ -1,24 +1,24 @@
 import path from "path";
 export function dynamicViteAssetImport(imageFileName: string) {
-  const filename = path.parse(imageFileName);
+  const filename = path.parse(`../public/${imageFileName}`);
   const name = filename.name;
   const ext = filename.ext;
   switch (ext) {
     case ".webp":
-      return import(`../assets/${name}.webp`);
+      return import(`../public/${name}.webp`);
     case ".jpg":
-      return import(`../assets/${name}.jpg`);
+      return import(`../public/${name}.jpg`);
     case ".png":
-      return import(`../assets/${name}.png`);
+      return import(`../public/${name}.png`);
     case ".svg":
-      return import(`../assets/${name}.svg`);
+      return import(`../public/${name}.svg`);
     case ".gif":
-      return import(`../assets/${name}.gif`);
+      return import(`../public/${name}.gif`);
     case ".avif":
-      return import(`../assets/${name}.avif`);
+      return import(`../public/${name}.avif`);
     case ".jpeg":
-      return import(`../assets/${name}.jpeg`);
+      return import(`../public/${name}.jpeg`);
     default:
-      return import(`../assets/${name}.jpg`);
+      return import(`../public/${name}.jpg`);
   }
 }

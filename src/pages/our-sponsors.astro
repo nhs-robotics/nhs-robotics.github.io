@@ -29,7 +29,7 @@ const sponsors = await getCollection("sponsors");
                 <div class="rounded-3xl border overflow-hidden hover:border-black hover:cursor-pointer h-96">
                   <Image
                     class="object-cover h-1/2 w-full object-center border-b"
-                    src={dynamicViteAssetImport("../../public/images/sponsors/" + sponsor.data.image)}
+                    src={dynamicViteAssetImport("images/sponsors/" + sponsor.data.image)}
                     alt={sponsor.data.description}
                   />
                   <div class="w-full h-full pl-4 pt-2">
