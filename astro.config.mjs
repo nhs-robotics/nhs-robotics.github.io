@@ -9,6 +9,6 @@ import keystatic from "@keystatic/astro";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), sitemap(), tailwind(), react(), markdoc(), keystatic()],
+  integrations: [mdx(), sitemap(), tailwind(), react(), markdoc()/*T, keystatic()*/],
   output: "static",
 });
