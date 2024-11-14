@@ -8,7 +8,7 @@ description: >-
 published: 2024-10-14T12:29:00.000Z
 updated: 2024-10-14T12:29:00.000Z
 hero:
-  image: /public/images/posts/a-new-chapter-welcome-to-the-new-t-10/hero/image.jpg
+  image: /images/posts/a-new-chapter-welcome-to-the-new-t-10/hero/image.jpg
   alt: A picture of the horizon with beautiful, lush, Swiss mountains
 tags:
   - coding
