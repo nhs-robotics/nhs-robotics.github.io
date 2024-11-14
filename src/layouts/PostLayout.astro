@@ -11,6 +11,7 @@ import { SITE_TITLE } from "../consts";
 import { getCollection } from "astro:content";
 import TableOfContents from "../components/TableOfContents.astro";
 import { Image } from "astro:assets";
+import { dynamicViteAssetImport } from "../dynamicViteAssetImport";
 
 type Props =
   | (CollectionEntry<"posts">["data"] & { headings: MarkdownHeading[] })
@@ -50,7 +51,7 @@ const recommendedPosts = (await getCollection("posts"))
   <body>
     <Nav />
 
-    <Image class="heroImage" src={import(`../../public/images/posts/${hero.image}`)} alt={hero.alt} />
+    <Image class="heroImage" src={dynamicViteAssetImport(`../../public/images/posts/${hero.image}`)} alt={hero.alt} />
 
     <main class="mx-auto max-w-[96rem]">
       <header>
@@ -123,7 +124,7 @@ const recommendedPosts = (await getCollection("posts"))
                     <a href={`/posts/${post.slug}`}>
                       <div class="grid grid-cols-[4rem_4fr] gap-2 items-center mb-4 rounded-xl border overflow-hidden hover:bg-white hover:border-black transition-colors duration-150">
                         <Image
-                          src={import(`../../public/images/posts/${post.data.hero.image}`)}
+                          src={dynamicViteAssetImport(`../../public/images/posts/${post.data.hero.image}`)}
                           alt={post.data.hero.alt}
                           class="object-cover object-center w-16 h-16"
                         />
